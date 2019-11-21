@@ -9,7 +9,7 @@
         </div>
 
         <div class="panel-body">
-            <form class="" action="/post/store" method="post">
+            <form class="" action="{{ route('post.store') }}" method="post">
                 {{ csrf_field() }}
                 <!--create input fields based on the columns define in the posts migration table-->
                 <div class="form-group">
