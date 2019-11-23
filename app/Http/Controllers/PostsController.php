@@ -34,7 +34,13 @@ class PostsController extends Controller
      */
     public function store(Request $request)
     {
-        dd($request->all());
+        // dd($request->all());
+        $this->validate($request, [
+            'title' => 'required|max:255',       // here we are saying that the title input is required plus the maximum number of string it will accept is 255
+            'featured' => 'required|image',      // The featured input is required plus it must be an image
+            'content' => 'required'
+         ]);
+         dd($request->all());
     }
 
     /**

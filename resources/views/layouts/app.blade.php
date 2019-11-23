@@ -86,7 +86,7 @@
                     @if (Auth::check())
                         <div class="col-lg-4">
                             <ul class="list-group">
-                                <li class="list-group-item"> <a href="/home">Home</a></li>
+                                <li class="list-group-item"> <a href="{{ route('home') }}">Home</a></li>
                                 <li class="list-group-item"> <a href="{{ route('post.create') }}">create new post</a></li>
                             </ul>
                         </div>

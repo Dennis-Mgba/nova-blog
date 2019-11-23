@@ -19,11 +19,14 @@ Route::get('/', function () {
 //list of routes, hence the Auth routes is pointing at the files in the auth directory
 Auth::routes();
 
-// Home page  route
-Route::get('/home', 'HomeController@index')->name('home');
-
 
 Route::group(['prefix' => 'admin', 'middleware' => 'auth'], function() {
+    // Home page route
+    Route::get('/home', [
+        'uses' => 'HomeController@index',
+        'as'   => 'home'
+    ]);
+
     Route::get('/post/create', [
         'uses' => 'PostsController@Create',
         'as'   => 'post.create'
