@@ -22,6 +22,7 @@
     <style>
         .py-3 {
             background-color: #F9F9F9;
+            min-height: 550px;
         }
     </style>
 
