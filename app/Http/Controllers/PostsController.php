@@ -2,6 +2,8 @@
 
 namespace App\Http\Controllers;
 
+use App\Category;
+use App\Post;
 use Illuminate\Http\Request;
 
 class PostsController extends Controller
@@ -23,7 +25,7 @@ class PostsController extends Controller
      */
     public function create()
     {
-        return view('admin.posts.create');
+        return view('admin.posts.create')->with('categories', Category::all());
     }
 
     /**
@@ -38,9 +40,29 @@ class PostsController extends Controller
         $this->validate($request, [
             'title' => 'required|max:255',       // here we are saying that the title input is required plus the maximum number of string it will accept is 255
             'featured' => 'required|image',      // The featured input is required plus it must be an image
-            'content' => 'required'
+            'content' => 'required',
+            'category_id' => 'required'
          ]);
-         dd($request->all());
+
+         // First we want to take care of the featured image, so that a user won't be able to upload one image more than once
+         $featured = $request->featured;
+         $featured_new_name = time().$featured->getClientOriginalName();
+
+         // next is to direct the image to the a storage folder. for now we will put the uploaded imae into the public directory as an asset
+         $featured->move('uploads/posts', $featured_new_name);
+
+         // then let's save the post
+         // $post = new Post;
+         $post = Post::create([
+        // make sure that the items on the right matches the fields in your table in the database
+            'title' => $request->title,
+            'content' => $request->content,
+            'featured' => 'uploads/posts'.$featured_new_name,       // the featured will be the path to the folder that will hold the images then concatenated with the file name
+            'category_id' => $request->category_id                 // the category_id is the category choosen
+         ]);
+
+
+         // dd($request->all());
     }
 
     /**

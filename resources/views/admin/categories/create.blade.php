@@ -5,7 +5,7 @@
 
     <div class="panel panel-default">
         <div class="panel-heading">
-            Create a new post
+            Create a new caterogy
         </div>
 
         <div class="panel-body">

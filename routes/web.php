@@ -63,12 +63,13 @@ Route::group(['prefix' => 'admin', 'middleware' => 'auth'], function() {
         'as' => 'category.edit'
     ]);
 
-    // category update route direct to the controller that populate the category table with new updated category
+    // category update route direct to the controller that populate the category table with new updated category. thus, it will receive the id of the data to be updated for idenfication purpose
     Route::post('/category/update/{id}', [
         'uses' => 'CategoriesController@update',
         'as' => 'category.update'
     ]);
 
+    // category destroy route direct to the controller that destroy/delete a category with a specified id from the table. thus, it will receive the id of the data to be deleted and directs to the destroy method in the CategoriesController
     Route::get('/category/delete/{id}', [
         'uses' => 'CategoriesController@destroy',
         'as' => 'category.delete'

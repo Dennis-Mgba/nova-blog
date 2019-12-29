@@ -33,6 +33,17 @@
                 </div>
 
                 <div class="form-group">
+                    <label for="category">Select Category</label>
+                    <select id="category_id" name="category_id" class="form-control">
+                        @foreach ($categories as $category)
+                            <option value="{{$category->id}}">
+                                {{$category->name}}
+                            </option>
+                        @endforeach
+                    </select>
+                </div>
+
+                <div class="form-group">
                     <label for="content">Content</label>
                     <textarea name="content" id="content" rows="5" cols="5" class="form-control"></textarea>
                 </div>

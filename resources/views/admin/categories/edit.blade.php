@@ -9,9 +9,9 @@
         </div>
 
         <div class="panel-body">
-            <form class="" action="{{ route('category.update', ['id' => $category->id]) }}" method="post">
+            <form class="" action="{{ route('category.update', ['id' => $category->id]) }}" method="post">  {{--specify where the route is going to submit to, with is the update route--}}
                 {{ csrf_field() }}
-                <!--create input fields based on the columns define in the posts migration table-->
+    
                 <div class="form-group">
                     <label for="name">Name</label>
                     <input type="text" name="name" value="{{ $category->name }}" class="form-control">
