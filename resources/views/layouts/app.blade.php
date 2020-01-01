@@ -20,7 +20,7 @@
     <link rel="stylesheet" href="{{ asset('css/toastr.min.css') }}">
 
     <!-- Styles -->
-    <link href="{{ asset('css/app.css') }}" rel="stylesheet">
+    {{-- <link href="{{ asset('css/app.css') }}" rel="stylesheet"> --}}
     <style>
         .py-3 {
             background-color: #F9F9F9;
@@ -90,9 +90,10 @@
                         <div class="col-lg-4">
                             <ul class="list-group">
                                 <li class="list-group-item"> <a href="{{ route('home') }}">Home</a></li>
-                                <li class="list-group-item"> <a href="{{ route('categories') }}">category</a></li>
+                                <li class="list-group-item"> <a href="{{ route('categories') }}">Category</a></li>
+                                <li class="list-group-item"> <a href="{{ route('posts') }}">All Posts</a></li>
                                 <li class="list-group-item"> <a href="{{ route('category.create') }}">Create new category</a></li>
-                                <li class="list-group-item"> <a href="{{ route('post.create') }}">create new post</a></li>
+                                <li class="list-group-item"> <a href="{{ route('post.create') }}">Create new post</a></li>
                             </ul>
                         </div>
                     @endif
@@ -117,7 +118,11 @@
     {{--check for presence of a session in our application, so that we can use the toastr--}}
     <script>
         @if(Session::has('success'))    // if there is a session called success, run the code on the next like of code.
-            toastr.success("{{ Session::get('success') }}")     // so on this line we are calling the toastr.success method on a define sucess session that we declared in our application
+            toastr.success("{{ Session::get('success') }}");     // so on this line we are calling the toastr.success method on a define sucess session that we declared in our application
+        @endif
+
+        @if(Session::has('info'))
+            toastr.info("{{ Session::get('info') }}");
         @endif
     </script>
 

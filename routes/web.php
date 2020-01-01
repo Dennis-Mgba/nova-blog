@@ -21,55 +21,69 @@ Auth::routes();
 
 
 Route::group(['prefix' => 'admin', 'middleware' => 'auth'], function() {
-    // Home page route direct to the controller return the home page
+    // Home page route direct to the homecontroller index method that return the home page
     Route::get('/home', [
         'uses' => 'HomeController@index',
         'as'   => 'home'
     ]);
 
-    // post create route direct to the controller that return the page with form to create a post
+    // post/create route direct to the postscontroller create method that return the page with form to create a post
     Route::get('/post/create', [
         'uses' => 'PostsController@Create',
         'as'   => 'post.create'
     ]);
 
-    // post store route direct to the controller that creates/populate the post table with new post
+    // post/store route direct to the postscontroller store method that creates/populate the post table with new post
     Route::post('/post/store', [
         'uses' => 'PostsController@store',
         'as'   => 'post.store'
     ]);
 
-    // category create route direct to the controller that return the page with form to create a category
+    // posts route direct to the postscontroller index method that will read and fetch the post data created
+    Route::get('/posts', [
+        'uses' => 'PostsController@index',
+        'as' => 'posts'
+    ]);
+
+
+    // posts/delete/id route direct to the postscontroller destroy method that will delete/destroy post data created
+    Route::get('/posts/delete/{id}', [
+        'uses' => 'PostsController@destroy',
+        'as' => 'post.delete'
+    ]);
+
+
+    // category create route direct to the categories controller create method that return the page with form to create a category
     Route::get('/category/create', [
         'uses' => 'CategoriesController@create',
         'as' => 'category.create'
     ]);
 
-    // category store route direct to the controller that creates/populate the category table with new category
+    // category store route direct to the categories controller store method that creates/populate the category table with new category
     Route::post('/category/store', [
         'uses' => 'CategoriesController@store',
         'as'   => 'category.store'
     ]);
 
-    // categories  route direct to the controller that return the category page with the category data fetched from the category table in the database
+    // categories  route direct to the categories controller index method that return the category page with the category data fetched from the category table in the database
     Route::get('/categories', [
         'uses' => 'CategoriesController@index',
         'as' => 'categories'
     ]);
 
-    // category edit route direct to the controller that return the edit page with form to edit/update a particular category
+    // category edit route direct to the categories controller edit method that return the edit page with form to edit/update a particular category
     Route::get('/category/edit/{id}', [
         'uses' => 'CategoriesController@edit',
         'as' => 'category.edit'
     ]);
 
-    // category update route direct to the controller that populate the category table with new updated category. thus, it will receive the id of the data to be updated for idenfication purpose
+    // category update route direct to the categories controller update method that populate the category table with new updated category. thus, it will receive the id of the data to be updated for idenfication purpose
     Route::post('/category/update/{id}', [
         'uses' => 'CategoriesController@update',
         'as' => 'category.update'
     ]);
 
-    // category destroy route direct to the controller that destroy/delete a category with a specified id from the table. thus, it will receive the id of the data to be deleted and directs to the destroy method in the CategoriesController
+    // category destroy route direct to the categories controller destroy that destroy/delete a category with a specified id from the table. thus, it will receive the id of the data to be deleted and directs to the destroy method in the CategoriesController
     Route::get('/category/delete/{id}', [
         'uses' => 'CategoriesController@destroy',
         'as' => 'category.delete'

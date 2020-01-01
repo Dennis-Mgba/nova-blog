@@ -16,10 +16,13 @@ class CreatePostsTable extends Migration
         Schema::create('posts', function (Blueprint $table) {
             $table->bigIncrements('id');
             $table->string('title');
+            $table->string('slug');
             $table->text('content');
-            $table->integer('category_id');     // the category  column will save the id of the category of the post created. like a post can be under category of food, coding, web-development,
-                                                // laravel is going to use the category column to build relationship
+            $table->integer('category_id');     // the category_id  column will save the id of the category of the post created. like a post can be under category of food, coding, web-development,
+                                                // we'll going to use the category_id column to create relationship with the id field of the category table
             $table->string('featured');   // the featured column is going to store featured image of a particular post
+
+            $table->softDeletes();
             $table->timestamps();
         });
     }

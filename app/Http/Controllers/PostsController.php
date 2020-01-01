@@ -4,36 +4,35 @@ namespace App\Http\Controllers;
 
 use App\Category;
 use App\Post;
+use Illuminate\Support\Str;
 use Illuminate\Http\Request;
 
 class PostsController extends Controller
 {
-    /**
-     * Display a listing of the resource.
-     *
-     * @return \Illuminate\Http\Response
-     */
+    // Read, fetch and display a list of all created post.
+
     public function index()
     {
-        //
+        return view('admin.posts.index')->with('posts', Post::all()); // when fetching data from the post table it will only grab those data where their deleted-at is "Null"
     }
 
-    /**
-     * Show the form for creating a new resource.
-     *
-     * @return \Illuminate\Http\Response
-     */
+
+    // Show the form for creating a new resource.
     public function create()
     {
-        return view('admin.posts.create')->with('categories', Category::all());
+        $categories = Category::all(); // get all the category
+
+        if($categories->count() == 0)   // if the category count is zero, that is if there is no category
+        {
+            Session::flash('info', 'You must select category before creating a post');
+            return redirect()->back();  // that is, return back to the create post form if there is no category
+        }
+
+        return view('admin.posts.create')->with('categories', $categories);
     }
 
-    /**
-     * Store a newly created resource in storage.
-     *
-     * @param  \Illuminate\Http\Request  $request
-     * @return \Illuminate\Http\Response
-     */
+
+    // Store a newly created resource in storage.
     public function store(Request $request)
     {
         // dd($request->all());
@@ -57,12 +56,13 @@ class PostsController extends Controller
         // make sure that the items on the right matches the fields in your table in the database
             'title' => $request->title,
             'content' => $request->content,
-            'featured' => 'uploads/posts'.$featured_new_name,       // the featured will be the path to the folder that will hold the images then concatenated with the file name
-            'category_id' => $request->category_id                 // the category_id is the category choosen
+            'featured' => 'uploads/posts/'.$featured_new_name,       // the featured will be the path to the folder that will hold the images then concatenated with the file name
+            'category_id' => $request->category_id,                // the category_id is the category choosen
+            'slug' => str::slug($request->title, '-')
          ]);
 
-
          // dd($request->all());
+         return redirect()->back();
     }
 
     /**
@@ -99,14 +99,17 @@ class PostsController extends Controller
         //
     }
 
-    /**
-     * Remove the specified resource from storage.
-     *
-     * @param  int  $id
-     * @return \Illuminate\Http\Response
-     */
+
+
+    // Remove the specified data from storage/database.
     public function destroy($id)
     {
-        //
+        $post = Post::find($id);
+
+        $post->delete();
+
+        // write a toatr notification
+
+        return redirect()->back();
     }
 }

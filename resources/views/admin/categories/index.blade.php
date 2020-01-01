@@ -5,7 +5,7 @@
         <div class="panel-body">
             <table class="table table-hover">
                 <thead>
-                    <th>Category</th>
+                    <th>Category name</th>
                     <th>editing</th>
                     <th>deleting</th>
                 </thead>
