@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Category;
 use App\Post;
+use Illuminate\Support\Facades\Session;
 use Illuminate\Support\Str;
 use Illuminate\Http\Request;
 
@@ -62,6 +63,8 @@ class PostsController extends Controller
          ]);
 
          // dd($request->all());
+
+         Session::flash('success', 'Post created successfully');
          return redirect()->back();
     }
 
@@ -76,27 +79,45 @@ class PostsController extends Controller
         //
     }
 
-    /**
-     * Show the form for editing the specified resource.
-     *
-     * @param  int  $id
-     * @return \Illuminate\Http\Response
-     */
+
+    // Show the form for editing the specified post.
     public function edit($id)
     {
-        //
+        $post = Post::find($id); // only find post that are not trashed
+
+        return view('admin.posts.edit')->with('post', $post)->with('categories', Category::all());
     }
 
-    /**
-     * Update the specified resource in storage.
-     *
-     * @param  \Illuminate\Http\Request  $request
-     * @param  int  $id
-     * @return \Illuminate\Http\Response
-     */
+
+
+    // Update the specified resource in storage.
     public function update(Request $request, $id)
     {
-        //
+        $this->validate($request, [
+            'title' => 'required',
+            'content' => 'required',
+            'category_id' => 'required'
+        ]);
+
+        $post = Post::find($id);
+
+        // check if the featured image was changed
+        if ($request->hasFile('featured')) {
+            $featured = $request->featured;
+            $featured_new_name = time().$featured->getClientOriginalName();
+            $featured->move('uploads/posts', $featured_new_name);
+
+            $post->featured = 'uploads/posts/'.$featured_new_name;
+        }
+
+        $post->title = $request->title;
+        $post->content = $request->content;
+        $post->category_id = $request->category_id;
+
+        $post->save();
+
+        Session::flash('success', 'Post updated successfully');
+        return redirect()->route('posts');
     }
 
 
@@ -105,11 +126,54 @@ class PostsController extends Controller
     public function destroy($id)
     {
         $post = Post::find($id);
-
         $post->delete();
 
-        // write a toatr notification
-
+        Session::flash('info', 'Post has been moved to trash');
         return redirect()->back();
     }
+
+
+
+    // Read and fetch the trashd post data
+    public function trashed()
+    {
+        $posts = Post::onlyTrashed()->get();
+
+        return view('admin.posts.trashed')->with('posts', $posts);
+    }
+
+
+
+    public function kill($id)
+    {
+        // to get at the records that was softly deleted,
+        // use Post::withTrashed() to get all the records including the trashed ones that was softly deleted
+        // ->where('id', $id) that is, where the id of the partcular record
+        // ->first() the record to get an instance of the record
+        // then the record using a ->forceDelete() method
+
+        $post = Post::withTrashed()->where('id', $id)->first();
+        // dd($post);
+        $post->forceDelete();
+
+        Session::flash('success', 'Record permanently deleted successfully');
+        return redirect()->back();
+    }
+
+
+    public function restore($id)
+    {
+        // to get at the records that was softly deleted,
+        // use Post::withTrashed() to get all the records including the trashed ones that was softly deleted
+        // ->where('id', $id) that is, where the id of the partcular record
+        // ->first() the record to get an instance of the record
+        // then the restore() method
+
+        $post = Post::withTrashed()->where('id', $id)->first();
+        $post->restore();
+
+        Session::flash('success', 'Post restored successfully');
+        return redirect()->route('posts');
+    }
+
 }

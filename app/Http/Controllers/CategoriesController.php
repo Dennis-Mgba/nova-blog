@@ -2,8 +2,8 @@
 
 namespace App\Http\Controllers;
 
-use Session;
 use App\Category;       // use the category model that is in charge of the category table
+use Illuminate\Support\Facades\Session;
 use Illuminate\Http\Request;
 
 class CategoriesController extends Controller
@@ -12,7 +12,6 @@ class CategoriesController extends Controller
     public function index()
     {
         return view('admin.categories.index')->with('categories', Category::all()); // in the with->() method, th first param is a variable we declaed called "categories" and the second param is a method all() binded to the Catetory eloquent model to fetch all the data of category in the database and passed it into the "categories" variable declared
-
     }
 
 
@@ -35,7 +34,6 @@ class CategoriesController extends Controller
         $category->save();
 
         Session::flash('success', 'Category created successfully');  // first param is the key "success" while the second is the message
-
         return redirect()->route('categories');
     }
 
@@ -68,7 +66,6 @@ class CategoriesController extends Controller
         $category->save();                  // then call a save method
 
         Session::flash('success', 'Category updated successfully');
-
         return redirect()->route('categories');     // return to the categories index page
     }
 
@@ -80,7 +77,6 @@ class CategoriesController extends Controller
         $category->delete();
 
         Session::flash('success', 'Category deleted successfully');
-
         return redirect()->route('categories');
     }
 }
