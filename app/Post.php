@@ -23,10 +23,17 @@ class Post extends Model
         return asset($featured);
     }
 
-    protected $dates = ['deleted_at'];
+
+    protected $dates = ['deleted_at'];          // for soft delete
+
 
     public function category()
     {
-        return $this->belongTo('App\Category');   // in the hasMany() - we will refrence the App\category class
+        return $this->belongTo('App\Category');   // in the hasMany() - we will refrence the App\category model class
+    }
+
+    public function tags()
+    {
+        return $this->belongToMany('App\Tag');
     }
 }

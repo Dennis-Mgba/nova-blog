@@ -88,7 +88,7 @@ Route::group(['prefix' => 'admin', 'middleware' => 'auth'], function() {
     ]);
 
 
-
+// ===============================================================================================
 
 
     // category create route direct to the categories controller create method that return the page with form to create a category
@@ -125,5 +125,44 @@ Route::group(['prefix' => 'admin', 'middleware' => 'auth'], function() {
     Route::get('/category/delete/{id}', [
         'uses' => 'CategoriesController@destroy',
         'as' => 'category.delete'
+    ]);
+
+//  =======================================================================================================================
+
+
+    // tags  route direct to the tags controller index method that return the tag page with the tag data fetched from the category table in the database
+    Route::get('/tags', [
+        'uses' => 'TagsController@index',
+        'as' => 'tags'
+    ]);
+
+    // tag create route direct to the tags controller create method that return the page with form to create a tag
+    Route::get('/tag/create', [
+        'uses' => 'TagsController@create',
+        'as' => 'tag.create'
+    ]);
+
+    // tag store route direct to the tags controller store method that creates/populate the tag table with new category
+    Route::post('/tag/store', [
+        'uses' => 'TagsController@store',
+        'as' => 'tag.store'
+    ]);
+
+    // tag edit route direct to the tags controller edit method that return the edit page with a form to edit/update a particular category
+    Route::get('/tag/edit/{id}', [
+        'uses' => 'TagsController@edit',
+        'as' => 'tag.edit'
+    ]);
+
+    // tag update route direct to the tags controller update method that populate the category table with new updated tag. thus, it will receive the id of the data to be updated for idenfication purpose
+    Route::post('/tag/update/{id}', [
+        'uses' => 'TagsController@update',
+        'as' => 'tag.update'
+    ]);
+
+    // tag destroy route direct to the tags controller destroy that destroy/delete a tag with a specified id from the table. thus, it will receive the id of the data to be deleted and directs to the destroy method in the tagsController
+    Route::get('/tag/delete/{id}', [
+        'uses' => 'TagsController@destroy',
+        'as' => 'tag.delete'
     ]);
 });
