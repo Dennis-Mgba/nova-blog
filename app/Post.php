@@ -29,7 +29,7 @@ class Post extends Model
 
     public function category()
     {
-        return $this->belongTo('App\Category');   // in the hasMany() - we will refrence the App\category model class
+        return $this->belongsTo('App\Category');   // in the belongTo() - we will refrence the App\category model class
     }
 
     public function tags()

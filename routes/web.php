@@ -11,6 +11,13 @@
 |
 */
 
+Route::get('/test', function() {
+    // in the return statement, call the category model, use the find method to find the id of the particular category
+    // you want to fetch  all it post then call ->posts as a property on it
+    return App\Post::find(2)->category;
+});
+
+
 // welcome page route
 Route::get('/', function () {
     return view('welcome');
