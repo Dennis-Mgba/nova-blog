@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Category;
+use App\Tag;
 use App\Post;
 use Illuminate\Support\Facades\Session;
 use Illuminate\Support\Str;
@@ -22,6 +23,7 @@ class PostsController extends Controller
     public function create()
     {
         $categories = Category::all(); // get all the category
+        $tags       = Tag::all();       // get all tag
 
         if($categories->count() == 0)   // if the category count is zero, that is if there is no category
         {
@@ -29,7 +31,8 @@ class PostsController extends Controller
             return redirect()->back();  // that is, return back to the create post form if there is no category
         }
 
-        return view('admin.posts.create')->with('categories', $categories);
+        return view('admin.posts.create')->with('categories', $categories)
+                                         ->with('tags', $tags);
     }
 
 
@@ -41,7 +44,8 @@ class PostsController extends Controller
             'title' => 'required|max:255',       // here we are saying that the title input is required plus the maximum number of string it will accept is 255
             'featured' => 'required|image',      // The featured input is required plus it must be an image
             'content' => 'required',
-            'category_id' => 'required'
+            'category_id' => 'required',
+            'tags' => 'required'
          ]);
 
          // First we want to take care of the featured image, so that a user won't be able to upload one image more than once
@@ -61,6 +65,8 @@ class PostsController extends Controller
             'category_id' => $request->category_id,                // the category_id is the category choosen
             'slug' => str::slug($request->title, '-')
          ]);
+
+         $post->tags()->attach($request->tags); // so we say to the $post, access the tags() belongsTo method in its model then call and attach method
 
          // dd($request->all());
 

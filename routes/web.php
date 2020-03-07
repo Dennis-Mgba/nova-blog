@@ -17,6 +17,10 @@ Route::get('/test', function() {
     return App\Post::find(2)->category;
 });
 
+Route::get('/test2', function() {
+    return App\Post::find(3)->tags;
+});
+
 
 // welcome page route
 Route::get('/', function () {
