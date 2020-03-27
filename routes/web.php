@@ -18,7 +18,7 @@ Route::get('/test', function() {
 });
 
 Route::get('/test2', function() {
-    return App\Post::find(3)->tags;
+    return App\Post::find(3)->tags;  // find the post with id 3 and fetch all the tags accosiated with it
 });
 
 

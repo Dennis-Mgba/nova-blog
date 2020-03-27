@@ -91,7 +91,9 @@ class PostsController extends Controller
     {
         $post = Post::find($id); // only find post that are not trashed
 
-        return view('admin.posts.edit')->with('post', $post)->with('categories', Category::all());
+        return view('admin.posts.edit')->with('post', $post)
+                                       ->with('categories', Category::all())
+                                       ->with('tags', Tag::all());
     }
 
 
@@ -121,6 +123,8 @@ class PostsController extends Controller
         $post->category_id = $request->category_id;
 
         $post->save();
+
+        $post->tags()->sync($request->tags); // this line of code will go to the database, delete all the tags and create new tags then call the attach() method
 
         Session::flash('success', 'Post updated successfully');
         return redirect()->route('posts');
