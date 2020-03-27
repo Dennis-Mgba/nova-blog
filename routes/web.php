@@ -12,14 +12,9 @@
 */
 
 Route::get('/test', function() {
-    // in the return statement, call the category model, use the find method to find the id of the particular category
-    // you want to fetch  all it post then call ->posts as a property on it
-    return App\Post::find(2)->category;
+    return App\Profile::find(2)->user; // find the profile of id 2 and fetch the user associated with it
 });
 
-Route::get('/test2', function() {
-    return App\Post::find(3)->tags;  // find the post with id 3 and fetch all the tags accosiated with it
-});
 
 
 // welcome page route

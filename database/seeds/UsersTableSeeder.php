@@ -11,10 +11,19 @@ class UsersTableSeeder extends Seeder
      */
     public function run()
     {
-        App\User::create([
-            'name' => 'Dennis Mgbah',
-            'email' => 'dennis@mail.me',
-            'password' => bcrypt('password')
+        $user =  App\User::create([
+                'name'     => 'Dennis Mgbah',
+                'email'    => 'dennis@mail.me',
+                'password' => bcrypt('password'),
+                'admin'    => 1,
+            ]);
+
+        App\Profile::create([
+            'user_id'   => $user->id,
+            'avatar'    => 'uploads/avatars/smile.png',
+            'about'     => 'A person is a being that has certain capacities or attributes such as reason, morality, consciousness or self-consciousness, and being a part of a culturally established form of social relations such as kinship, ownership of property, or legal responsibility.',
+            'facebook' => 'facebook.com',
+            'youtube'   => 'youtube.com'
         ]);
     }
 }

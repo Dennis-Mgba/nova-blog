@@ -18,6 +18,7 @@ class CreateUsersTable extends Migration
             $table->string('name');
             $table->string('email')->unique();
             $table->timestamp('email_verified_at')->nullable();
+            $table->boolean('admin')->default(0); // this field is going to tell us if a user is an admin or not
             $table->string('password');
             $table->rememberToken();
             $table->timestamps();

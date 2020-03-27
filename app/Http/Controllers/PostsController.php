@@ -71,7 +71,8 @@ class PostsController extends Controller
          // dd($request->all());
 
          Session::flash('success', 'Post created successfully');
-         return redirect()->back();
+         // return redirect()->back();
+         return redirect()->route('posts');
     }
 
     /**
