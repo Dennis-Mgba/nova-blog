@@ -96,7 +96,9 @@
                                 <li class="list-group-item"> <a href="{{ route('categories') }}">Category</a></li>
                                 <li class="list-group-item"> <a href="{{ route('tags') }}">Tag</a></li>
                                 <li class="list-group-item"> <a href="{{ route('posts') }}">All Posts</a></li>
+                                <li class="list-group-item"> <a href="{{ route('users') }}">Users</a></li>
                                 <li class="list-group-item"> <a href="{{ route('post.trashed') }}">All trashed posts</a></li>
+                                <li class="list-group-item"> <a href="{{ route('user.create') }}">Add User</a></li>
                                 <li class="list-group-item"> <a href="{{ route('category.create') }}">Add new category</a></li>
                                 <li class="list-group-item"> <a href="{{ route('tag.create') }}">Add new Tag</a></li>
                                 <li class="list-group-item"> <a href="{{ route('post.create') }}">Create new post</a></li>
