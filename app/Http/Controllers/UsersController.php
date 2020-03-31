@@ -54,7 +54,8 @@ class UsersController extends Controller
 
         // after creating the user - then create a profile for the user
         $profile = Profile::create([
-            'user_id' => $user->id
+            'user_id' => $user->id,
+            'avatar' => 'uploads/avatars/person.png'
         ]);
 
         Session::flash('success', 'user added successfully');
@@ -104,5 +105,28 @@ class UsersController extends Controller
     public function destroy($id)
     {
         //
+    }
+
+
+    // Make a user an administrator
+    public function admin($id) {
+        $user = User::find($id);
+        $user ->admin = 1;
+        $user->save();
+
+        Session::flash('success', 'Successfully made user an admin');
+        return redirect()->back();
+
+    }
+
+    // Remove administrator permission from user
+    public function remove_admin($id) {
+        $user = User::find($id);
+        $user ->admin = 0;
+        $user->save();
+
+        Session::flash('success', 'Successfully made user non-admin');
+        return redirect()->back();
+
     }
 }
