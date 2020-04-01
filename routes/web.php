@@ -192,7 +192,7 @@ Route::group(['prefix' => 'admin', 'middleware' => 'auth'], function() {
     Route::get('/user/admin/{id}', [
         'uses' => 'UsersController@admin',
         'as' => 'user.admin'
-    ]);
+    ])->middleware('admin');
 
     Route::get('/user/remove_admin/{id}', [
         'uses' => 'UsersController@remove_admin',

@@ -44,10 +44,6 @@
                 text-align: center;
             }
 
-            .title {
-                font-size: 84px;
-            }
-
             .links > a {
                 color: #636b6f;
                 padding: 0 25px;
@@ -60,6 +56,7 @@
 
             .m-b-md {
                 margin-bottom: 30px;
+                font-size: 30px;
             }
         </style>
     </head>
@@ -80,11 +77,11 @@
             @endif
 
             <div class="content">
-                <div class="title m-b-md">
-                    Laravel
+                <div class=" m-b-md">
+                    This the landing page of Nova-blog <br /> I think you should login or register
                 </div>
 
-                <div class="links">
+                {{-- <div class="links">
                     <a href="https://laravel.com/docs">Docs</a>
                     <a href="https://laracasts.com">Laracasts</a>
                     <a href="https://laravel-news.com">News</a>
@@ -93,7 +90,7 @@
                     <a href="https://forge.laravel.com">Forge</a>
                     <a href="https://vapor.laravel.com">Vapor</a>
                     <a href="https://github.com/laravel/laravel">GitHub</a>
-                </div>
+                </div> --}}
             </div>
         </div>
     </body>
