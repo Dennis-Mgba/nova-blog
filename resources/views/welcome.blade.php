@@ -78,7 +78,7 @@
 
             <div class="content">
                 <div class=" m-b-md">
-                    This the landing page of Nova-blog <br /> I think you should login or register
+                    Welcome to Nova-blog
                 </div>
 
                 {{-- <div class="links">

@@ -19,7 +19,7 @@ class Admin
     {
         if(!Auth::user()->admin)
         {
-            Session::flash('info', 'You do not have the permission to this action');
+            Session::flash('info', 'You do not have the permission');
             return redirect()->back();
         }
 

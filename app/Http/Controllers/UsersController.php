@@ -10,6 +10,13 @@ use Illuminate\Http\Request;
 
 class UsersController extends Controller
 {
+
+    public function __construct()
+    {
+        // place the middleware code Here
+        $this->middleware('admin');
+    }
+
     /**
      * Display a listing of the resource.
      *
