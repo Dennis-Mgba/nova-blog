@@ -65,7 +65,7 @@
             @if (Route::has('login'))           <!-- This line explains that if the URL has a "login" string parameter display the /home blade file -->
                 <div class="top-right links">
                     @auth
-                        <a href="{{ url('/home') }}">Home</a>   <!--That is display the home page-->
+                        <a href="{{ url('/admin/home') }}">Home</a>   <!--That is display the home page-->
                     @else
                         <a href="{{ route('login') }}">Login</a>        <!--redirect user to the login page-->
 
