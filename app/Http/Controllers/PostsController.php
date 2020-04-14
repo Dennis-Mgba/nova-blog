@@ -25,10 +25,10 @@ class PostsController extends Controller
         $categories = Category::all(); // get all the category
         $tags       = Tag::all();       // get all tag
 
-        if($categories->count() == 0)   // if the category count is zero, that is if there is no category
+        if($categories->count() == 0 || $tags->count() == 0)   // if the category or tag count is zero
         {
-            Session::flash('info', 'You must select category before creating a post');
-            return redirect()->back();  // that is, return back to the create post form if there is no category
+            Session::flash('info', 'There must be a tag and a category available before creating a post');
+            return redirect()->back();  // that is, return back to the create post form if there is no category or tag
         }
 
         return view('admin.posts.create')->with('categories', $categories)

@@ -15,11 +15,13 @@ class CategoriesController extends Controller
     }
 
 
+
     // return the form for creating a new category
     public function create()
     {
         return view('admin.categories.create');
     }
+
 
 
     // Store name of newly added category into the categories table in the database.
@@ -37,12 +39,8 @@ class CategoriesController extends Controller
         return redirect()->route('categories');
     }
 
-    /**
-     * Display the specified resource.
-     *
-     * @param  int  $id
-     * @return \Illuminate\Http\Response
-     */
+
+
     public function show($id)
     {
         //
@@ -58,6 +56,7 @@ class CategoriesController extends Controller
     }
 
 
+
     // Update the specified resource in storage.
     public function update(Request $request, $id)
     {
@@ -70,10 +69,19 @@ class CategoriesController extends Controller
     }
 
 
+
     //Remove the specified resource from storage.
     public function destroy($id)
     {
         $category = Category::find($id);
+        // after gtting the particular category by id
+        
+        foreach ($category->posts as $post) {
+            // dfirst of all delete all the post associated with it
+            $post->forceDelete();
+        }
+
+        // delete the category
         $category->delete();
 
         Session::flash('success', 'Category deleted successfully');
