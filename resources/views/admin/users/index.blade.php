@@ -24,6 +24,7 @@
                                 <td>
                                     {{ $user->name }}
                                 </td>
+
                                 <td>
                                     @if ($user->admin)
                                         <a href="{{ route('user.remove.admin', ['id' => $user->id]) }}" class="btn btn-xs btn-danger">Remove permisions</a>
@@ -31,15 +32,11 @@
                                         <a href="{{ route('user.admin', ['id' => $user->id]) }}" class="btn btn-xs btn-success">Make admin</a>
                                     @endif
                                 </td>
+
                                 <td>
-                                    @if ($user->admin)
-                                        Admin
-                                    @else
-                                        Not admin
+                                    @if (Auth::id() !== $user->id)    {{--we don't want the user to be able to delete him self except other users--}}
+                                        <a href="{{ route('user.delete', ['id' => $user->id]) }}" class="btn btn-xs btn-danger">Delete</a>
                                     @endif
-                                </td>
-                                <td>
-                                    Delete
                                 </td>
                             </tr>
                         @endforeach

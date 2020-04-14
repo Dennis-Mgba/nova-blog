@@ -109,10 +109,15 @@ class UsersController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function destroy($id)
-    {
-        //
-    }
+     public function destroy($id)
+     {
+         $user = User::find($id);
+         $user->profile->delete();   // delete profile
+         $user->delete();           // delete user
+
+         Session::flash('success', 'User deleted');
+         return redirect()->back();
+     }
 
 
     // Make a user an administrator

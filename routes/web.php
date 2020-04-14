@@ -200,14 +200,19 @@ Route::group(['prefix' => 'admin', 'middleware' => 'auth'], function() {
     ]);
 
     // return edit profile
-    Route::get('user/profile', [
+    Route::get('/user/profile', [
         'uses' => 'ProfilesController@index',
         'as' => 'users.profile'
     ]);
 
     // update profile
-    Route::post('user/profile/update', [    // notice that we didn't use {id} here, it's because we are already getting the authenticated user
+    Route::post('/user/profile/update', [    // notice that we didn't use {id} here, it's because we are already getting the authenticated user
         'uses' => 'ProfilesController@update',
         'as' => 'user.profile.update'
+    ]);
+
+    Route::get('/user/delete/{id}', [
+        'uses' => 'UsersController@destroy',
+        'as' => 'user.delete'
     ]);
 });
