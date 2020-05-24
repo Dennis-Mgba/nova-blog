@@ -106,6 +106,9 @@
                                 <li class="list-group-item"> <a href="{{ route('tag.create') }}">Add new Tag</a></li>
                                 <li class="list-group-item"> <a href="{{ route('post.create') }}">Create new post</a></li>
                                 <li class="list-group-item"> <a href="{{ route('users.profile') }}">My profile</a></li>
+                                @if (Auth::User()->admin)
+                                    <li class="list-group-item"> <a href="{{ route('settings') }}">Settings</a></li>
+                                @endif
                             </ul>
                         </div>
                     @endif
