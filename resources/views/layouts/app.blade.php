@@ -22,6 +22,7 @@
     <!-- toastr styles -->
     <link href="//cdnjs.cloudflare.com/ajax/libs/toastr.js/latest/css/toastr.min.css" rel="stylesheet">
 
+    @yield('styles')
 
     <style>
         .py-3 {
@@ -90,7 +91,7 @@
                 <div class="row">
 
                     @if (Auth::check())
-                        <div class="col-lg-4">
+                        <div class="col-lg-3">
                             <ul class="list-group">
                                 <li class="list-group-item"> <a href="{{ route('home') }}">Home</a></li>
                                 <li class="list-group-item"> <a href="{{ route('categories') }}">Category</a></li>
@@ -109,7 +110,7 @@
                         </div>
                     @endif
 
-                    <div class="col-lg-8">
+                    <div class="col-lg-9">
                             @yield('content')
                     </div>
 
@@ -140,6 +141,8 @@
             toastr.warning("{{ Session::get('warning') }}");
         @endif
     </script>
+
+    @yield('scripts')
 
 </body>
 </html>
