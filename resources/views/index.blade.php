@@ -33,6 +33,10 @@
         .text-center{
             text-align: center;
         }
+
+        .second-post-section img {
+            height: 300px;
+        }
     </style>
 
 </head>
@@ -77,7 +81,7 @@
                                             <i class="seoicon-clock"></i>
 
                                             <time class="published" datetime="2016-04-17 12:00:00">
-                                                {{ $latest_post->created_at->diffForHumans() }}
+                                            {{ $latest_post->created_at->diffForHumans() }}  -  {{ $latest_post->created_at->toFormattedDateString() }}
                                             </time>
 
                                         </span>
@@ -102,14 +106,14 @@
             <div class="col-lg-2"></div>
         </div>
 
-        <div class="row">
+        <div class="row"> <!-- div containing the last two post -->
             <div class="col-lg-6">
                 <article class="hentry post post-standard has-post-thumbnail sticky">
 
-                        <div class="post-thumb">
-                            <img src="{{ asset('app/img/2.png') }}" alt="seo">
+                        <div class="post-thumb second-post-section">
+                            <img src="{{ $second_post->featured }}" alt="{{ $second_post->title }}">
                             <div class="overlay"></div>
-                            <a href="app/img/2.png" class="link-image js-zoom-image">
+                            <a href="{{ $second_post->featured }}" class="link-image js-zoom-image">
                                 <i class="seoicon-zoom"></i>
                             </a>
                             <a href="#" class="link-post">
@@ -121,8 +125,8 @@
 
                             <div class="post__content-info">
 
-                                    <h2 class="post__title entry-title ">
-                                        <a href="15_blog_details.html">The Important & Standard Post Format</a>
+                                    <h2 class="post__title entry-title text-center ">
+                                        <a href="15_blog_details.html">{{ $second_post->title }}</a>
                                     </h2>
 
                                     <div class="post-additional-info">
@@ -132,14 +136,14 @@
                                             <i class="seoicon-clock"></i>
 
                                             <time class="published" datetime="2016-04-17 12:00:00">
-                                                April 17, 2016
+                                                {{ $second_post->created_at->toFormattedDateString() }}
                                             </time>
 
                                         </span>
 
                                         <span class="category">
                                             <i class="seoicon-tags"></i>
-                                            <a href="#">Video</a>
+                                            <a href="#">{{ $second_post->category->name }}</a>
                                         </span>
 
                                         <span class="post__comments">
@@ -156,10 +160,10 @@
             <div class="col-lg-6">
                 <article class="hentry post post-standard has-post-thumbnail sticky">
 
-                        <div class="post-thumb">
-                            <img src="{{ asset('app/img/3.jpg') }}" alt="seo">
+                        <div class="post-thumb second-post-section">
+                            <img src="{{ $third_post->featured }}" alt="{{ $third_post->title }}">
                             <div class="overlay"></div>
-                            <a href="app/img/3.jpg" class="link-image js-zoom-image">
+                            <a href="{{ $third_post->featured }}" class="link-image js-zoom-image">
                                 <i class="seoicon-zoom"></i>
                             </a>
                             <a href="#" class="link-post">
@@ -171,8 +175,8 @@
 
                             <div class="post__content-info">
 
-                                    <h2 class="post__title entry-title ">
-                                        <a href="15_blog_details.html">The Important & Standard Post Format</a>
+                                    <h2 class="post__title entry-title text-center">
+                                        <a href="15_blog_details.html">{{ $third_post->title }}</a>
                                     </h2>
 
                                     <div class="post-additional-info">
@@ -182,14 +186,14 @@
                                             <i class="seoicon-clock"></i>
 
                                             <time class="published" datetime="2016-04-17 12:00:00">
-                                                April 17, 2016
+                                                {{ $third_post->created_at->toFormattedDateString() }}
                                             </time>
 
                                         </span>
 
                                         <span class="category">
                                             <i class="seoicon-tags"></i>
-                                            <a href="#">Video</a>
+                                            <a href="#">{{ $third_post->category->name }}</a>
                                         </span>
 
                                         <span class="post__comments">
