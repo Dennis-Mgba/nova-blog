@@ -18,9 +18,10 @@ Route::get('/test', function() {
 
 
 // welcome page route
-Route::get('/', function () {
-    return view('welcome');
-});
+Route::get('/', [
+    'uses' => 'FrontEndController@index',
+    'as' => 'index'
+]);
 
 //list of routes, hence the Auth routes is pointing at the files in the auth directory
 Auth::routes();
