@@ -86,7 +86,7 @@
     $(document).ready(function() {
         $('#content').summernote({
         placeholder: 'Creative Writing...',
-        height: 120
+        height: 500
       });
     });
     </script>
