@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 use App\Category;
 use App\Setting;
 use App\Post;
+use App\Tag;
 
 use Illuminate\Http\Request;
 
@@ -29,4 +30,16 @@ class FrontEndController extends Controller
         ->with('second_post', Post::orderBy('created_at', 'desc')->skip(1)->take(1)->get()->first())
         ->with('third_post', Post::orderBy('created_at', 'desc')->skip(2)->take(1)->get()->first());
     }
+
+
+    public function singlePost($slug) // set an argument
+    {
+        $post = Post::where('slug', $slug)->first();    // query the post table to fetch the slug
+        return view('singlepost')->with('post', $post)
+                                  ->with('post_title', $post->title)
+                                  ->with('categories', Category::take(4)->get())
+                                  ->with('settings', Setting::first())
+                                  ->with('title', Setting::first()->site_name);
+    }
+
 }

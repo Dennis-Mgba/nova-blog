@@ -23,6 +23,12 @@ Route::get('/', [
     'as' => 'index'
 ]);
 
+Route::get('/{slug}', [     // pass in the slug as a parameter
+    'uses' => 'FrontEndController@singlePost',
+    'as' => 'post.single'
+]);
+
+
 //list of routes, hence the Auth routes is pointing at the files in the auth directory
 Auth::routes();
 
