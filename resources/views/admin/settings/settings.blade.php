@@ -28,8 +28,18 @@
                 </div>
 
                 <div class="form-group">
+                    <label for="address">Location</label>
+                    <input type="text" name="location" value="{{ $settings->location }}" class="form-control">
+                </div>
+
+                <div class="form-group">
                     <label for="address">Address</label>
                     <input type="text" name="address" value="{{ $settings->address }}" class="form-control">
+                </div>
+
+                <div class="form-group">
+                    <label for="address">Summary</label>
+                    <input type="text" name="summary" value="{{ $settings->summary }}" class="form-control">
                 </div>
 
                 <div class="form-group">
