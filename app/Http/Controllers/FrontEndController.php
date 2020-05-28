@@ -34,12 +34,18 @@ class FrontEndController extends Controller
 
     public function singlePost($slug) // set an argument
     {
-        $post = Post::where('slug', $slug)->first();    // query the post table to fetch the slug
+        $post = Post::where('slug', $slug)->first();    // query the post table to fetch the slug of the  current post
+
+        $next_id = Post::where('id', '>', $post->id)->min('id');   // get all the post where the id is great than the current post id then pick the one with the minimum id
+        $prev_id = Post::where('id', '<', $post->id)->max('id');   // get all the post where the id is less than the current post id then pick the one with the maximum id
+
         return view('singlepost')->with('post', $post)
                                   ->with('post_title', $post->title)
                                   ->with('categories', Category::take(4)->get())
                                   ->with('settings', Setting::first())
-                                  ->with('title', Setting::first()->site_name);
+                                  ->with('title', Setting::first()->site_name)
+                                  ->with('next_post', Post::find($next_id))
+                                  ->with('prev_post', Post::find($prev_id));
     }
 
 }
