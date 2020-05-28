@@ -67,7 +67,7 @@
         <div class="row" style="margin-bottom: 50px;">
             <div class="col-lg-2"></div>
             <div class="col-lg-8"> <!-- div for the latest post -->
-                <article class="hentry post post-standard has-post-thumbnail sticky">
+                <article class="hentry post post-standard has-post-thumbnail">
                         <div class="post-thumb latest-post">
                             <img src="{{ $latest_post->featured}}" alt="{{ $latest_post->title }}">
                             <div class="overlay"></div>
@@ -156,7 +156,7 @@
 
                                         <span class="category">
                                             <i class="seoicon-tags"></i>
-                                            <a href="{{ route('category.single', ['id' => $second_post->category->id]) }}">{{ $second_post->category->name }}</a>
+                                            <a href="">{{ $second_post->category->name }}</a>
                                         </span>
 
                                         <span class="post__comments">
@@ -318,7 +318,7 @@
 
 <!-- Subscribe Form -->
 
-<div class="container-fluid bg-green-color">
+<div class="container-fluid" style="background-color: #4775d1;">
     <div class="row">
         <div class="container">
             <div class="row">
