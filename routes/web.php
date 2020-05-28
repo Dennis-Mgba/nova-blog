@@ -27,6 +27,11 @@ Route::get('/post/{slug}', [     // pass in the slug as a parameter
     'as' => 'post.single'
 ]);
 
+Route::get('/category/{id}', [
+    'uses' => 'FrontEndController@category',
+    'as' => 'category.single'
+]);
+
 
 
 //list of routes, hence the Auth routes is pointing at the files in the auth directory

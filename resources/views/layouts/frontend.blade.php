@@ -63,7 +63,7 @@
 
 <!-- Subscribe Form -->
 
-<div class="container-fluid bg-green-color">
+<div class="container-fluid" style="background-color: #4775d1;">
     <div class="row">
         <div class="container">
             <div class="row">
@@ -175,4 +175,3 @@
 
 </body>
 </html>
-s
