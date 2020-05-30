@@ -22,6 +22,16 @@ Route::get('/', [
     'as' => 'index'
 ]);
 
+Route::get('/results', function() {
+    $search_posts = \App\Post::where('title', 'like', '%'. request('search_query') . '%')->get(); // search the post table where the search query is like the post title
+    return view('results')->with('search_posts', $search_posts)
+                          // ->with('title', 'Seach results : ' .request('search_query'))
+                          ->with('title', \App\Setting::first()->site_name)
+                          ->with('categories', \App\Category::take(4)->get())
+                          ->with('settings', \App\Setting::first())
+                          ->with('search_query',request('search_query'));
+});
+
 Route::get('/post/{slug}', [     // pass in the slug as a parameter
     'uses' => 'FrontEndController@singlePost',
     'as' => 'post.single'
