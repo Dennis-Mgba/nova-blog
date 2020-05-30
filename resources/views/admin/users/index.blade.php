@@ -11,7 +11,7 @@
                     <th>Image</th>
                     <th>Name</th>
                     <th>Permission</th>
-                    <th>Status</th>
+                    {{-- <th>Status</th> --}}
                     <th>Delete</th>
                 </thead>
                 <tbody>
