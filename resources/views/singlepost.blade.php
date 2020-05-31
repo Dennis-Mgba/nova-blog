@@ -75,22 +75,9 @@
                             </div>
                         </div>
 
-                        <div class="socials">Share:
-                            <a href="#" class="social__item">
-                                <i class="seoicon-social-facebook"></i>
-                            </a>
-                            <a href="#" class="social__item">
-                                <i class="seoicon-social-twitter"></i>
-                            </a>
-                            <a href="#" class="social__item">
-                                <i class="seoicon-social-linkedin"></i>
-                            </a>
-                            <a href="#" class="social__item">
-                                <i class="seoicon-social-google-plus"></i>
-                            </a>
-                            <a href="#" class="social__item">
-                                <i class="seoicon-social-pinterest"></i>
-                            </a>
+                        <div class="socials text-center">Share:                        
+                            <!-- Sharing tool from the addthis.com -->
+                            <div class="addthis_inline_share_toolbox_2ey4"></div>
                         </div>
 
                     </article>
