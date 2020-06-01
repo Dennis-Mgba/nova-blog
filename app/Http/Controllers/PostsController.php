@@ -63,7 +63,8 @@ class PostsController extends Controller
             'content' => $request->content,
             'featured' => 'uploads/posts/'.$featured_new_name,       // the featured will be the path to the folder that will hold the images then concatenated with the file name
             'category_id' => $request->category_id,                // the category_id is the category choosen
-            'slug' => str::slug($request->title, '-')
+            'slug' => str::slug($request->title, '-'),
+            'user_id' =>  Auth::id()                    // to the user_id column on the post table assign the authenticated user'id to its
          ]);
 
          $post->tags()->attach($request->tags); // so we say to the $post, access the tags() belongsTo method in its model then call and attach method

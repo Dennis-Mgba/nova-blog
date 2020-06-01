@@ -1,4 +1,6 @@
 <?php
+use Spatie\Newsletter\NewsletterFacade as Newsletter;
+use Illuminate\Support\Facades\Session;
 
 /*
 |--------------------------------------------------------------------------
@@ -11,25 +13,61 @@
 |
 */
 
+// For collection email subscription through mailchimp
+Route::post('subscribe', function() {
+    $email = request('email');
+
+    Newsletter::subscribe($email);
+    Session::flash('subscribed', 'Successfully Subscribed!');
+    return redirect()->back();
+});
+
+
 Route::get('/test', function() {
     return App\Profile::find(2)->user; // find the profile of id 2 and fetch the user associated with it
 });
 
 
-
-// welcome page route
+// Front end pages route
 Route::get('/', [
     'uses' => 'FrontEndController@index',
     'as' => 'index'
 ]);
+
+Route::get('/results', function() {
+    $search_posts = \App\Post::where('title', 'like', '%'. request('search_query') . '%')->get(); // search the post table where the search query is like the post title
+    return view('results')->with('search_posts', $search_posts)
+                          // ->with('title', 'Seach results : ' .request('search_query'))
+                          ->with('title', \App\Setting::first()->site_name)
+                          ->with('categories', \App\Category::take(4)->get())
+                          ->with('settings', \App\Setting::first())
+                          ->with('search_query',request('search_query'));
+});
+
+Route::get('/post/{slug}', [     // pass in the slug as a parameter
+    'uses' => 'FrontEndController@singlePost',
+    'as' => 'post.single'
+]);
+
+Route::get('/category/{id}', [
+    'uses' => 'FrontEndController@category',
+    'as' => 'category.single'
+]);
+
+Route::get('/tag/{id}', [
+    'uses' => 'FrontEndController@tag',
+    'as' => 'tag.single'
+]);
+
+
 
 //list of routes, hence the Auth routes is pointing at the files in the auth directory
 Auth::routes();
 
 
 Route::group(['prefix' => 'admin', 'middleware' => 'auth'], function() {
-    // Home page route direct to the homecontroller index method that return the home page
-    Route::get('/home', [
+    // Home page route direct to the homecontroller index method that return the home page - the dashboard file
+    Route::get('/dashboard', [
         'uses' => 'HomeController@index',
         'as'   => 'home'
     ]);

@@ -11,7 +11,7 @@
                     <th>Image</th>
                     <th>Name</th>
                     <th>Permission</th>
-                    <th>Status</th>
+                    {{-- <th>Status</th> --}}
                     <th>Delete</th>
                 </thead>
                 <tbody>
@@ -19,7 +19,7 @@
                         @foreach($users as $user)
                             <tr>
                                 <td>
-                                    <img src="{{ asset($user->profile->avatar) }}" alt="users' avatar" width="50px" height="50px" style="border-radius: 50px;">
+                                    <img src="{{ asset($user->profile->avatar) }}" alt="users' avatar" width="50px" height="50px" style="border-radius: 50px; object-fit: cover;">
                                 </td>
                                 <td>
                                     {{ $user->name }}

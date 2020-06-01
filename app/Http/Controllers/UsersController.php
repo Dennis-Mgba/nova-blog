@@ -61,7 +61,7 @@ class UsersController extends Controller
 
         // after creating the user - then create a profile for the user
         $profile = Profile::create([
-            'user_id' => $user->id,
+            'user_id' => $user->id, // the $user then access user table id -> , is used in object scope to access methods and properties of an object.
             'avatar' => 'uploads/avatars/person.png'
         ]);
 
