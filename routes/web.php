@@ -1,4 +1,6 @@
 <?php
+use Spatie\Newsletter\NewsletterFacade as Newsletter;
+use Illuminate\Support\Facades\Session;
 
 /*
 |--------------------------------------------------------------------------
@@ -10,6 +12,16 @@
 | contains the "web" middleware group. Now create something great!
 |
 */
+
+// For collection email subscription through mailchimp
+Route::post('subscribe', function() {
+    $email = request('email');
+
+    Newsletter::subscribe($email);
+    Session::flash('subscribed', 'Successfully Subscribed!');
+    return redirect()->back();
+});
+
 
 Route::get('/test', function() {
     return App\Profile::find(2)->user; // find the profile of id 2 and fetch the user associated with it

@@ -13,19 +13,19 @@
 
 
     <!--Plugins styles-->
-
     <link rel="stylesheet" type="text/css" href="{{ asset('app/css/jquery.mCustomScrollbar.min.css') }}">
     <link rel="stylesheet" type="text/css" href="{{ asset('app/css/swiper.min.css') }}">
     <link rel="stylesheet" type="text/css" href="{{ asset('app/css/primary-menu.css') }}">
     <link rel="stylesheet" type="text/css" href="{{ asset('app/css/magnific-popup.css') }}">
 
     <!--Styles for RTL-->
-
     <!--<link rel="stylesheet" type="text/css" href="app/css/rtl.css">-->
 
     <!--External fonts-->
-
     <link href='https://fonts.googleapis.com/css?family=Varela+Round' rel='stylesheet' type='text/css'>
+
+    <!-- toastr styles -->
+    <link href="//cdnjs.cloudflare.com/ajax/libs/toastr.js/latest/css/toastr.min.css" rel="stylesheet">
     <style>
         .padded-50{
             padding: 40px;
@@ -325,12 +325,15 @@
                 <div class="subscribe scrollme">
                     <div class="col-lg-6 col-lg-offset-5 col-md-6 col-md-offset-5 col-sm-12 col-xs-12">
                         <h4 class="subscribe-title">Email Newsletters!</h4>
-                        <form class="subscribe-form" method="post" action="">
+
+                        <form class="subscribe-form" method="post" action="/subscribe">
+                             {{ csrf_field() }} <!-- so that we can be allowed to submit the form -->
                             <input class="email input-standard-grey input-white" name="email" required="required" placeholder="Your Email Address" type="email">
-                            <button class="subscr-btn">subscribe
+                            <button class="subscr-btn" type="submit">subscribe
                                 <span class="semicircle--right"></span>
                             </button>
                         </form>
+
                         <div class="sub-title">Sign up for new Seosignt content, updates, surveys & offers.</div>
 
                     </div>
@@ -414,6 +417,10 @@
 
 <!-- JS Script -->
 
+{{-- Toastr js --}}
+<script src="//cdnjs.cloudflare.com/ajax/libs/jquery/2.0.3/jquery.min.js"></script>
+<script type="text/javascript" src="//cdnjs.cloudflare.com/ajax/libs/toastr.js/latest/js/toastr.min.js"></script>
+
 <script src="{{ asset('app/js/jquery-2.1.4.min.js') }}"></script>
 <script src="{{ asset('app/js/crum-mega-menu.js') }}"></script>
 <script src="{{ asset('app/js/swiper.jquery.min.js') }}"></script>
@@ -425,6 +432,12 @@
 <script src="{{ asset('app/js/ScrollMagic.min.js') }}"></script>
 <script src="{{ asset('app/js/animation.velocity.min.js') }}"></script>
 
+
+<script>
+    @if (Session::has('subscribed'))
+        toastr.success("{{ Session::get('subscribed') }}");
+    @endif
+</script>
 
 <!-- ...end JS Script -->
 

@@ -142,7 +142,6 @@
             toastr.info("{{ Session::get('info') }}");
         @elseif (Session::has('warning'))
             toastr.warning("{{ Session::get('warning') }}");
-        @endif
     </script>
 
     @yield('scripts')
