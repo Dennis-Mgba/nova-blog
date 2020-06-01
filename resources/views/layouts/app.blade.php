@@ -29,6 +29,11 @@
             background-color: #F9F9F9;
             min-height: 550px;
         }
+
+         .dash {
+            margin-left: 2px;
+            margin-bottom: 50px;
+        }
     </style>
 
 </head>
@@ -87,13 +92,13 @@
         </nav>
 
         <main class="py-3">
-            <div class="container">
+            <div class="container dash">
                 <div class="row">
 
                     @if (Auth::check())
                         <div class="col-lg-3">
                             <ul class="list-group">
-                                <li class="list-group-item"> <a href="{{ route('home') }}">Home</a></li>
+                                <li class="list-group-item"> <a href="{{ route('home') }}">Dashboard</a></li>
                                 <li class="list-group-item"> <a href="{{ route('categories') }}">Category</a></li>
                                 <li class="list-group-item"> <a href="{{ route('tags') }}">Tag</a></li>
                                 <li class="list-group-item"> <a href="{{ route('posts') }}">All Posts</a></li>
@@ -142,6 +147,7 @@
             toastr.info("{{ Session::get('info') }}");
         @elseif (Session::has('warning'))
             toastr.warning("{{ Session::get('warning') }}");
+        @endif
     </script>
 
     @yield('scripts')

@@ -66,8 +66,8 @@ Auth::routes();
 
 
 Route::group(['prefix' => 'admin', 'middleware' => 'auth'], function() {
-    // Home page route direct to the homecontroller index method that return the home page
-    Route::get('/home', [
+    // Home page route direct to the homecontroller index method that return the home page - the dashboard file
+    Route::get('/dashboard', [
         'uses' => 'HomeController@index',
         'as'   => 'home'
     ]);
